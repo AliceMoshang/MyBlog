@@ -1,6 +1,7 @@
 <template>
   <div id="login">
   登陆
+  <div class="close" @click="closeLog">X</div>
   </div>
 </template>
 
@@ -15,25 +16,24 @@ export default {
     return{
     }
   },
-  components: { 
+  methods:{
+    closeLog(){
+      this.$store.commit("setPopLog",false)
+    }
   }
 }
 </script>
 
 <style>
-.popup{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background: #aaa;
-    z-index: 3;   
-    width: 340px;
-    height: 355px;
-    border-radius: 8px;
-  }
- 
+#login{
+  position: relative;
+  width: 21.25rem;
+  height: 22.25rem;
+}
+.close{
+  position: absolute;
+  top: 0.3rem;
+  right:  0.3rem;
+}
 
 </style>

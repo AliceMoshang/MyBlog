@@ -7,6 +7,8 @@ import VueRouter from 'vue-router'
 import App from './App'
 import Routes from './routes'
 import axios from 'axios'
+import {store} from './store/store.js'
+
 import '../static/css/common.css'
 import '../static/css/font/iconfont.css'
 // import {Pagination} from 'element-ui'
@@ -68,5 +70,6 @@ new Vue({
   components: { App },
   template: '<App/>',
   router: router,
-  render: h => h(App)
+  render: h => h(App),
+  store
 })

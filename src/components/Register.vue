@@ -1,6 +1,7 @@
 <template>
-  <div id="register">
+  <div class="register">
   注册
+  <div class="close" @click="closeReg">X</div>
   </div>
 </template>
 
@@ -15,25 +16,25 @@ export default {
     return{
     }
   },
-  components: { 
+  methods:{
+    closeReg(){
+      this.$store.commit("setPopReg",false)
+    }
   }
 }
 </script>
 
-<style>
-.popup{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background: #aaa;
-    z-index: 3;   
-    width: 340px;
-    height: 355px;
-    border-radius: 8px;
-  }
+<style scoped>
+.register{
+  position: relative;
+  width: 340px;
+  height: 355px;
+}
+.close{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
  
 
 </style>

@@ -5,8 +5,8 @@
 				<div class="dis-box justify-content-between plr-20">
 					<div class="fs24 fw-b ce pr-30">Fatimah.Xu Blog</div>
 					<div class="dis-box">
-						<div class="ce fw-b pr-15" @click="login">Login</div>
-						<div class="ce fw-b" @click="register">Register</div>
+						<div class="ce fw-b pr-15 pointer" @click="login">Login</div>
+						<div class="ce fw-b pointer" @click="register">Register</div>
 					</div>
 				</div>
 			</div>		
@@ -39,10 +39,12 @@
 		},
 		methods:{
 			login(){
-				
+				this.$store.commit("setPopLog",true)
+				this.$store.commit("setPopReg",false)
 			},
 			register(){
-
+				this.$store.commit("setPopReg",true)
+				this.$store.commit("setPopLog",false)
 			}
 		}
 
@@ -152,7 +154,7 @@
 		position: absolute;
 		top: 15px;
 		width: 100%;
-		z-index: 2;
+		z-index: 998;
 	}
 	.popup{
 		position: absolute;
@@ -166,6 +168,9 @@
 		width: 340px;
 		height: 355px;
 		border-radius: 8px;
+	}
+	.pointer{
+		cursor: pointer;
 	}
 		
 </style>

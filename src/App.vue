@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-<!--     <add-blog></add-blog> -->
-   <!-- <show-blogs></show-blogs> -->
    <blog-header></blog-header>
    <router-view></router-view>
    <blog-footer></blog-footer>
@@ -10,12 +8,13 @@
       <login></login>
     </div>
    </div>
+
    <div class="popwrap" v-show="RegisShow">
     <div class="popup plr-30 ptb-20">
       <register></register>
     </div>
    </div>
-    
+   <div class="poptips dis-box justify-content-center" v-if="success"><div class="cf fs14">{{msg}}</div></div>
   </div>
 </template>
 
@@ -40,6 +39,13 @@ export default {
   created(){
     
   },
+  watch:{
+    msg:()=>{
+      return setTimeout(()=>{
+        this.msg = ""
+      },1000)
+    }
+  },
   computed:{
     LogisShow(){
       return this.$store.state.LogisShow
@@ -47,6 +53,12 @@ export default {
     RegisShow(){
       return this.$store.state.RegisShow
     },
+    success(){
+      return this.$store.state.success
+    },
+    msg(){
+      return this.$store.state.msg
+    }
   },
   components: { 
     AddBlog,ShowBlogs,BlogHeader,BlogFooter,Login,Register
@@ -82,5 +94,19 @@ export default {
     border-radius: 8px;
     box-sizing: border-box;
   }
+.poptips{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 50%);
+  -moz-transform: translate(-50%, 50%);
+  transform: translate(-50%, -50%);
+  background: #888;
+  z-index: 1003;   
+  width: 5.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  opacity: 0.9;
+}
 
 </style>

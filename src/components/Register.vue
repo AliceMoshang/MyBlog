@@ -100,9 +100,16 @@
           this.message = ""
         }
         this.$http.post('/BlogUsers.json',data).then(res=>{
-          alert(1)
-          console.log(11,res.data)
+          // console.log(11,res.data)
+          this.$store.commit('userAction',{success:true,msg:"注册成功！"})
+          setTimeout(()=>{
+            this.$store.commit('userAction',{success:false,msg:""})
+            this.$store.commit("setPopLog",{LogisShow:true,nav:1})
+            this.$store.commit("setPopReg",{RegisShow:false,nav:1})
+          },1000)
+
         })
+        
       }
     }
   }

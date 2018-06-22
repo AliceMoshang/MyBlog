@@ -4,9 +4,13 @@
 			<div class="tips">
 				<div class="dis-box justify-content-between plr-20">
 					<div class="fs24 fw-b ce pr-30">Fatimah.Xu Blog</div>
-					<div class="dis-box">
+					<div class="dis-box" v-if="!loginstatus">
 						<div class="ce fw-b pr-15 pointer" @click="login">Login</div>
 						<div class="ce fw-b pointer" @click="register">Register</div>
+					</div>
+					<div v-if="loginstatus" class="dis-box">
+						<div class="cf fs-inta fs14">{{account}}</div>
+						<div class="cf fs-inta pl-20 fs14 pointer" @click="logout">[退出]</div>
 					</div>
 				</div>
 			</div>		
@@ -44,6 +48,14 @@
 				itemImg :[]
 			}
 		},
+		computed:{
+			loginstatus(){
+				return this.$store.state.loginstatus
+			},
+			account(){
+				return this.$store.state.account
+			}
+		},
 		methods:{
 			login(){
 				this.$store.commit("setPopLog",{LogisShow:true,nav:1})
@@ -52,6 +64,11 @@
 			register(){
 				this.$store.commit("setPopReg",{RegisShow:true,nav:2})
 				this.$store.commit("setPopLog",{LogisShow:false,nav:2})
+			},
+			logout(){
+				this.$store.commit('userAction',{loginstatus:false,
+              account:""})
+				location.reload()
 			}
 		}
 

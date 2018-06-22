@@ -7,6 +7,10 @@ export const store= new Vuex.Store({
 		LogisShow: null,
 		RegisShow: null,
 		nav:null,
+		success:null,
+		msg:'',
+		account:'',
+		loginstatus:null
 	},
 	getters:{
 
@@ -21,6 +25,13 @@ export const store= new Vuex.Store({
 			state.nav = data.nav
 
 		},
+		userAction(state,data){
+			state.success = data.success
+			state.msg = data.msg
+			state.loginstatus = data.loginstatus
+			state.account = data.account
+
+		}
 	},
 	actions:{
 

@@ -103,9 +103,39 @@
           this.message = rs.msg
           return
         }
-        alert(1)
-        this.$http.post('/BlogUsers.json',data).then(res=>{
+        this.$http.get('/BlogUsers.json',data).then(res=>{
           console.log(11,res.data)
+          let users = []
+          for (let key in res.data){
+            res.data[key].id = key
+            users.push(res.data[key])
+          }
+          let result = users.filter((user)=>{
+            return user.account === this.ruleForm2.account &&
+            user.pass === this.ruleForm2.pass
+          })
+          if(result.length>0){
+            this.$store.commit('userAction',
+              {success:true,
+              msg:"登录成功！",
+              })
+             setTimeout(()=>{
+              this.$store.commit('userAction',{success:false,msg:"",loginstatus:true,
+                account:result[0].account})
+              this.$store.commit("setPopLog",{LogisShow:false,nav:1})
+            },1000)
+          }else{
+            this.$store.commit('userAction',
+              {success:true,
+              msg:"登录失败！",
+              })
+            setTimeout(()=>{
+              this.$store.commit('userAction',{success:false,msg:"",loginstatus:false,
+                account:""})
+            },1000)
+          }
+         
+
         })
       }
     }

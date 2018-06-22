@@ -16,8 +16,15 @@
 			</div>
 		</div>	
 		<nav class="dis-box">
-			<router-link  to="/" exact>OVERVIEW</router-link>
-			<router-link to="/add" exact>ADDBLOG</router-link>	
+			<div>
+				<router-link  to="/" exact>OVERVIEW</router-link>
+			</div>
+			
+			<div class="fw-b cf ">&nbsp</div>
+			<div>
+				<router-link to="/add" exact>ADDBLOG</router-link>	
+			</div>
+			
 		</nav>
 		<!-- 登陆与注册的弹窗 -->
 		<!-- <div class="popup b">
@@ -39,12 +46,12 @@
 		},
 		methods:{
 			login(){
-				this.$store.commit("setPopLog",true)
-				this.$store.commit("setPopReg",false)
+				this.$store.commit("setPopLog",{LogisShow:true,nav:1})
+				this.$store.commit("setPopReg",{RegisShow:false,nav:1})
 			},
 			register(){
-				this.$store.commit("setPopReg",true)
-				this.$store.commit("setPopLog",false)
+				this.$store.commit("setPopReg",{RegisShow:true,nav:2})
+				this.$store.commit("setPopLog",{LogisShow:false,nav:2})
 			}
 		}
 
@@ -82,7 +89,7 @@
 		color: #eee;
 		font-weight: bold;
 		text-decoration: none;
-		padding: 10px;
+		padding: 0.8rem;
 		text-align: center;
 		opacity: 0.4;
 	}
@@ -97,10 +104,26 @@
 		position: relative;
 		margin: 0 auto;
 	}
+	@media screen and (min-width: 768px) {
+	  	.tit{
+			overflow: hidden;
+			height: 26.94rem;
+			width: 100%;
+			background-attachment: scroll;
+			background-image:  url("../../src/assets/home-bg.jpg");	
+			background-size: 100% 100%;
+			-moz-background-size:100% 100%;
+		} 
+		.tit .down{
+			font-size: 1.66rem;
+			padding: 10px;
+			font-style: italic;
+		}
+	}
 	@media screen and (max-width: 768px) {
 	  	.tit{
 			overflow: hidden;
-			height: 300px;
+			height: 20rem;
 			width: 100%;
 			background-attachment: scroll;
 			
@@ -109,28 +132,30 @@
 			-moz-background-size:100% 100%;
 		} 
 		.tit .up{
-			font-size: 36px;
+			font-size: 2rem;
 		}
 		.tit .down{
-			font-size: 16px;
+			font-size: 0.89rem;
 			font-style: italic;
 			padding: 5px;
 		}
 	}
-	@media screen and (min-width: 768px) {
+	@media screen and (max-width: 330px) {
 	  	.tit{
 			overflow: hidden;
-			height: 485px;
+			height: 20rem;
 			width: 100%;
 			background-attachment: scroll;
 			background-image:  url("../../src/assets/home-bg.jpg");	
 			background-size: 100% 100%;
 			-moz-background-size:100% 100%;
 		} 
-		
+		.up{
+			font-size: 2rem;
+		}
 		.tit .down{
-			font-size: 30px;
-			padding: 10px;
+			font-size: 1.66rem;
+			padding: 0.56rem;
 			font-style: italic;
 		}
 	}
@@ -146,7 +171,7 @@
 		left: 50%;
 		-webkit-transform: translate(-50%,-50%);
 		z-index: 1;
-		font-size: 76px;
+		font-size: 4.22rem;
 		font-weight: bold;
 		color: #ffffff;
 	}

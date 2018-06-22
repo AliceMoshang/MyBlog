@@ -6,12 +6,12 @@
    <router-view></router-view>
    <blog-footer></blog-footer>
    <div class="popwrap" v-show="LogisShow">
-     <div class="popup">
+     <div class="popup plr-30 ptb-20">
       <login></login>
     </div>
    </div>
    <div class="popwrap" v-show="RegisShow">
-    <div class="popup">
+    <div class="popup plr-30 ptb-20">
       <register></register>
     </div>
    </div>
@@ -77,19 +77,10 @@ export default {
     transform: translate(-50%, -50%);
     background: #fff;
     z-index: 999;   
-    width: 21.25rem;
-    height: 22.25rem;
+    width: 20rem;
+    height: 20rem;
     border-radius: 8px;
+    box-sizing: border-box;
   }
-  @media screen and (max-width: 768px){
-  html{
-    font-size: 16px;
-  }
- }
-  @media screen and (max-width: 480px){
-    
-    html{
-      font-size: 14px;
-  }
-}
+
 </style>

@@ -10,7 +10,7 @@
 					</div>
 					<div v-if="loginstatus" class="dis-box">
 						<div class="cf fs-inta fs14">{{account}}</div>
-						<div class="cf fs-inta pl-20 fs14 pointer" @click="logout">[退出]</div>
+						<div class="cf fs-inta pl-20 fs14 pointer iconfont icon-icon" @click="logout"></div>
 					</div>
 				</div>
 			</div>		

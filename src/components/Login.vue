@@ -127,7 +127,7 @@
           }else{
             this.$store.commit('userAction',
               {success:true,
-              msg:"登录失败！",
+              msg:"用户名或密码错误",
               })
             setTimeout(()=>{
               this.$store.commit('userAction',{success:false,msg:"",loginstatus:false,

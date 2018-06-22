@@ -64,13 +64,11 @@ export default {
 
     // axios请求
     axios.get('https://wd2206394391jwoklu.wilddogio.com/Aposts.json').then(res=>{
-        return res.data  
-      }).then(data=>{
+        console.log(777,res.data)
       var blogsArray = [];
-      for (let key in data){
-  
-        data[key].id = key
-        blogsArray.push(data[key])
+      for (let key in res.data){
+        res.data[key].id = key
+        blogsArray.push(res.data[key])
         
       }
       console.log(44,blogsArray)

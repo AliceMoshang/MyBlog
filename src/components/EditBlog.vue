@@ -38,17 +38,20 @@
     </form>
 
     <div v-if="!submitie" v-theme:column="'middle'">
-      <h3  class="pd-10 ">您的博客更改成功！</h3>
+      <div class="pd-10 fs12 c-red el-icon-info"><span class="pl-10 c-red">您的博客更改成功！</span></div>
     </div>
 
     <div id="preview" v-theme:column="'middle'">
       <label class="tit">PREVIEW</label>
       <p class="fs20 fw-b ta-c pd-10">{{blog.title}}</p>
       <article class="ti-20 fs14 mb-10">{{blog.content}}</article>
-      <label class="fs12 pt-10 fs-inta c9"><span class="pr-10 c9">Author:</span>{{blog.author}}</label>
-      </br>
-      <label class="pr-10 c9 fs12 fs-inta">Category:</label>
-      <label v-for="item in blog.category" class="fs12 fs-inta c9">{{item}}</label>
+      <div class="pd-20 pb-10">
+        <label class="fs12 pt-10 fs-inta c9"><span class="pr-10 c9">Author:</span>{{blog.author}}</label>
+        </br>
+        <label class="pr-10 c9 fs12 fs-inta">Category:</label>
+        <label v-for="item in blog.category" class="fs12 fs-inta c9">{{item}}</label>
+      </div>
+      
     </div>
 
   </div>
@@ -60,13 +63,20 @@ export default {
   name: 'add-blog',
   data () {
     return {
-    	id:this.$route.params.id,
+    	id:"",
       blog: {},
       authors:['请选择','helen','chric','alice'],
       submitie: true
     }
   },
-  created(){
+  mounted(){
+    // alert(1)
+    console.log(443,this.$route.query.cid)
+    if(this.$route.query.cid){
+      this.id = this.$route.query.cid
+      console.log(24521,this.id)
+    }
+    console.log(2323,this.id)
   	this.fetchData()
   },
   methods:{
@@ -76,10 +86,13 @@ export default {
   			this.blog= res.data
   		})
   	},
-    post: function(){
+    post(){
       axios.put("/Aposts/"+this.id+'.json',this.blog).then((data)=>{
           console.log(data)
           this.submitie = false
+          setTimeout(()=>{
+            this.$router.push('/')
+          },1000)
       })
     }
   }

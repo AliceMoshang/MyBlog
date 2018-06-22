@@ -14,7 +14,7 @@
       <register></register>
     </div>
    </div>
-   <div class="poptips dis-box justify-content-center" v-if="success"><div class="cf fs14">{{msg}}</div></div>
+   <div class="poptips dis-box justify-content-center" v-if="success"><div class="cf fs12">{{msg}}</div></div>
   </div>
 </template>
 
@@ -103,7 +103,7 @@ export default {
   transform: translate(-50%, -50%);
   background: #888;
   z-index: 1003;   
-  width: 5.5rem;
+  width: 6.5rem;
   height: 2.5rem;
   border-radius: 8px;
   opacity: 0.9;

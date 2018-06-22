@@ -70,10 +70,22 @@ export default {
       submitie: true
     }
   },
+  computed:{
+    account(){
+      return this.$store.getters.getAccount
+    }
+  },
   methods:{
-    post: function(){      
-      axios.post("/Aposts.json",this.blog).then((data)=>{
-          console.log(121,data)
+
+    post(){ 
+      let data ={
+        title: this.blog.title,
+        content: this.blog.content,
+        category: this.blog.category,
+        author: this.blog.author,
+        account: this.account
+      }     
+      axios.post("/Aposts.json",data).then((data)=>{
           this.submitie = false
       })
     }

@@ -6,7 +6,7 @@
     <div class="plr-20 dot fw-b fs12 c9">·</div>
     <div class="navitem" @click="tapnav(false,2)" :class="{on : nav == 2}">注册</div>
   </div>
-  <div class="line mb-20">
+  <div class="line mb-15">
     <div :class="{dotline: nav== 1}" v-show="nav==1"></div>
     <div :class="{movedot: nav== 2}" v-show="nav==2"></div>
   </div>
@@ -109,7 +109,7 @@
           },1000)
 
         })
-        
+
       }
     }
   }

@@ -13,7 +13,8 @@ export const store= new Vuex.Store({
 		loginstatus:null
 	},
 	getters:{
-
+		getLoginstatus: state=>state.loginstatus,
+		getAccount: state=>state.account
 	},
 	mutations:{
 		setPopLog(state,data){

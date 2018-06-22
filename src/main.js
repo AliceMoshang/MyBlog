@@ -44,6 +44,9 @@ Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Icon)
+
+
+
 //自定义指令(全局注册)
 Vue.directive('rainbow',{
 	bind(el,binding,vnode){

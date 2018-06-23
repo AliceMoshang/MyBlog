@@ -10,7 +10,8 @@ export const store= new Vuex.Store({
 		success:null,
 		msg:'',
 		account:'',
-		loginstatus:null
+		loginstatus:null,
+		UserItems:[]
 	},
 	getters:{
 		getLoginstatus: state=>state.loginstatus,
@@ -32,6 +33,27 @@ export const store= new Vuex.Store({
 			state.loginstatus = data.loginstatus
 			state.account = data.account
 
+		},
+		setUserItems(state,data){
+			state.UserItems = data
+		},
+		addUserItems(state,data){
+			state.UserItems.push(data)
+		},
+		deleteUserItems(state,data){
+			state.UserItems.splice(state.UserItems.indexOf(data),1)
+		},
+		editUserItems(state,data){
+			// for(let key in state.UserItems){
+			// 	if(state.UserItems[key].id==data){
+			// 		if(state.UserItems[key].type==0){
+			// 			state.UserItems[key].permission = "管理员"
+			// 		}else{
+			// 			state.UserItems[key].permission = "会员"
+			// 		}
+					
+			// 	}
+			// }
 		}
 	},
 	actions:{

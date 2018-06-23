@@ -16,7 +16,7 @@ Vue.config.productionTip = false
 
 //全局配置axios
 axios.defaults.baseURL='https://wd2206394391jwoklu.wilddogio.com'
-Vue.prototype.$http = axios
+
 // axios.defaults.headers.common['Authorization'] = 'Token' //配置头部信息
 // axios.defaults.headers.post['Content-type'] = 'application/urlencode' //post请求头
 // axios.defaults.headers.get['Accepts'] = 'application/json' //get请求头
@@ -38,12 +38,18 @@ import {
   	FormItem,
   	Input,
   	Icon,
+  	Table,
+  	TableColumn
   } from 'element-ui'
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Icon)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Select)
+Vue.use(Option)
 
 
 

@@ -35,25 +35,6 @@
     name:'login',
     data() {
       
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
       return {
         message:'',
         ruleForm2: {
@@ -79,7 +60,7 @@
         this.$store.commit("setPopReg",{RegisShow:!boolean,nav:n})
       },
       checkAccount(){
-        let res1= checkData('account',this.ruleForm2.account)
+        let res1= checkData('phone',this.ruleForm2.account)
           this.message = res1.msg
           return
       },
@@ -89,7 +70,7 @@
           pass:this.ruleForm2.pass,
         }
         let nec = ['account', 'pass']
-        let re_account = checkData('account',this.ruleForm2.account)
+        let re_account = checkData('phone',this.ruleForm2.account)
 
         //手机号或邮箱字段限制
         if(!re_account.status) {

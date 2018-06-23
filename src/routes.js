@@ -2,10 +2,12 @@ import ShowBlogs from './components/ShowBlogs.vue'
 import AddBlog from './components/AddBlog.vue'
 import SingleBlog from './components/SingleBlog.vue'
 import EditBlog from './components/EditBlog.vue'
+import Admin from './components/Admin.vue'
 
 
 import {store} from './store/store.js'
 export default [
+	{path:'/admin',component:Admin},
 	{path:'/',component:ShowBlogs},
 	{path:'/add',component:AddBlog,beforeEnter:(to,from,next)=>{
 		// console.log(to)

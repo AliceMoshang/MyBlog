@@ -108,5 +108,11 @@ export default {
   border-radius: 8px;
   opacity: 0.9;
 }
-
+.el-input__inner{
+  height: 34px !important;
+    line-height: 34px !important;
+} 
+.el-input__icon{
+  line-height: 34px !important;
+}
 </style>

@@ -15,7 +15,7 @@
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-dengluyonghu c9"></div>
-      <input type="text" placeholder="手机号或者邮箱" class="pl-10 flex-1" v-model="ruleForm2.account" @blur="checkAccount" >
+      <input type="text" placeholder="手机号" class="pl-10 flex-1" v-model="ruleForm2.account" @blur="checkAccount" >
     </div>
 
     <div class="pd-15 bb dis-box">
@@ -66,39 +66,59 @@
         this.$store.commit("setPopReg",{RegisShow:!boolean,nav:n})
       },
       checkAccount(){
-        let res1= checkData('account',this.ruleForm2.account)
-          this.message = res1.msg
+        //检查用户名，并限制为手机号
+        let res1= checkData('phone',this.ruleForm2.account)
+        this.message = res1.msg
+        if(res1.status == true){
+          this.$http.get('/BlogUsers.json').then(res=>{
+              // console.log(6666,res.data)
+              for(let key in res.data){
+                // console.log(res.data[key])
+                if(res.data[key].account ===this.ruleForm2.account){
+                  this.message = "用户名已存在"
+                  return
+                }
+              }
+          })
           return
+        }          
       },
       apply(){
         let data={
           account:this.ruleForm2.account,
           pass:this.ruleForm2.pass,
           checkpass:this.ruleForm2.checkpass,
-
         }
-        let nec = ['account', 'pass','checkpass']
-        let re_account = checkData('account',this.ruleForm2.account)
-
-        //手机号或邮箱字段限制
-        if(!re_account.status) {
-          this.message = re_account.msg    
-          return
+        //检查用户名，并限制为手机号和邮箱
+        let re_account = checkData('phone',this.ruleForm2.account)
+        this.message = re_account.msg
+        if(re_account.status == true){
+          this.$http.get('/BlogUsers.json').then(res=>{
+              console.log(777,res.data)
+              for(let key in res.data){
+                // console.log(res.data[key])
+                if(res.data[key].account ===this.ruleForm2.account){
+                  this.message = "用户名已存在"
+                  return
+                }
+              }
+          })
         }
-
         // 必填项不能为空
+        let nec = ['account', 'pass','checkpass']
         let rs = checkData('complement', data, nec)
         if(!rs.status){
           this.message = rs.msg
           return
         }
-
+        //检查2次输入的密码
         if(data.pass !== data.checkpass){
           this.message = "两次输入密码不一致!"
           return
         }else{
           this.message = ""
         }
+
         this.$http.post('/BlogUsers.json',data).then(res=>{
           // console.log(11,res.data)
           this.$store.commit('userAction',{success:true,msg:"注册成功！"})
@@ -107,10 +127,9 @@
             this.$store.commit("setPopLog",{LogisShow:true,nav:1})
             this.$store.commit("setPopReg",{RegisShow:false,nav:1})
           },1000)
-
         })
-
       }
+      
     }
   }
 </script>

@@ -4,18 +4,18 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export const store= new Vuex.Store({
 	state:{
-		LogisShow: null,
-		RegisShow: null,
-		nav:null,
-		success:null,
-		msg:'',
-		account:'',
-		loginstatus:null,
-		UserItems:[]
+		LogisShow: null,//登陆界面显示条件 ，app.vue中使用
+		RegisShow: null,//注册页面显示条件 ，app.vue中使用
+		nav:null, //切换登陆注册的导航状态，登陆注册组件有使用
+		success:null,//app.vue中消息提示状态
+		msg:'',//app.vue中消息提示的信息内容
+		phone:'', //当前登陆的用户
+		loginstatus:null,//登陆状态
+		UserItems:[],//admin中使用到,注册时候或者在admin添加用户时候写入state里用户信息
 	},
 	getters:{
 		getLoginstatus: state=>state.loginstatus,
-		getAccount: state=>state.account
+		getAccount: state=>state.phone
 	},
 	mutations:{
 		setPopLog(state,data){
@@ -28,10 +28,12 @@ export const store= new Vuex.Store({
 
 		},
 		userAction(state,data){
+
 			state.success = data.success
 			state.msg = data.msg
 			state.loginstatus = data.loginstatus
-			state.account = data.account
+			state.phone = data.phone
+			
 
 		},
 		setUserItems(state,data){

@@ -9,7 +9,7 @@
 						<div class="ce fw-b pointer" @click="register">Register</div>
 					</div>
 					<div v-if="loginstatus" class="dis-box">
-						<div class="cf fs-inta fs14">{{account}}</div>
+						<div class="cf fs-inta fs14">{{phone}}</div>
 						<div class="cf fs-inta pl-20 fs14 pointer iconfont icon-icon" @click="logout"></div>
 					</div>
 				</div>
@@ -27,6 +27,10 @@
 			<div class="fw-b cf ">&nbsp</div>
 			<div>
 				<router-link to="/add" exact>ADDBLOG</router-link>	
+			</div>
+			<div class="fw-b cf ">&nbsp</div>
+			<div>
+				<router-link to="/admin" exact>ADMIN</router-link>	
 			</div>
 			
 		</nav>
@@ -52,14 +56,15 @@
 			loginstatus(){
 				return this.$store.state.loginstatus
 			},
-			account(){
-				return this.$store.state.account
+			phone(){
+				return this.$store.state.phone
 			}
 		},
 		methods:{
 			login(){
 				this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				this.$store.commit("setPopReg",{RegisShow:false,nav:1})
+				this.$store.commit('userAction',{loginstatus:false,phone:null})
 			},
 			register(){
 				this.$store.commit("setPopReg",{RegisShow:true,nav:2})
@@ -67,8 +72,9 @@
 			},
 			logout(){
 				this.$store.commit('userAction',{loginstatus:false,
-              account:""})
-				location.reload()
+              phone:""})
+				this.$router.push('/')
+				location.reload() //强制刷新，清除用户登录输入的数据。
 			}
 		}
 

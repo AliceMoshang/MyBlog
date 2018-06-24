@@ -15,7 +15,7 @@
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-dengluyonghu c9"></div>
-      <input type="text" placeholder="手机号或者邮箱" class="pl-10 flex-1" v-model="ruleForm2.account" @blur="checkAccount" >
+      <input type="text" placeholder="手机号或者邮箱" class="pl-10 flex-1" v-model="ruleForm2.phone" @blur="checkAccount" >
     </div>
 
     <div class="pd-15 bb dis-box">
@@ -39,13 +39,12 @@
         message:'',
         ruleForm2: {
           pass: '',
-          account:'',
+          phone:'',
           checkpass:''
         },
       }
     },
-    mounted(){
-    },
+   
     computed:{
       nav(){
         return this.$store.state.nav
@@ -56,25 +55,25 @@
         this.$store.commit("setPopLog",false)
       },
       tapnav(boolean,n){
-        this.$store.commit("setPopLog",{LogisShow:boolean,nav:n})
+        this.$store.commit("setPopLog",{LogisShow:boolean,nav:n,loginstatus:false,phone:null})
         this.$store.commit("setPopReg",{RegisShow:!boolean,nav:n})
       },
       checkAccount(){
-        let res1= checkData('phone',this.ruleForm2.account)
+        let res1= checkData('phone',this.ruleForm2.phone)
           this.message = res1.msg
           return
       },
       apply(){
         let data={
-          account:this.ruleForm2.account,
+          phone:this.ruleForm2.phone,
           pass:this.ruleForm2.pass,
         }
-        let nec = ['account', 'pass']
-        let re_account = checkData('phone',this.ruleForm2.account)
+        let nec = ['phone', 'pass']
+        let re_phone = checkData('phone',this.ruleForm2.phone)
 
         //手机号或邮箱字段限制
-        if(!re_account.status) {
-          this.message = re_account.msg    
+        if(!re_phone.status) {
+          this.message = re_phone.msg    
           return
         }
 
@@ -92,7 +91,7 @@
             users.push(res.data[key])
           }
           let result = users.filter((user)=>{
-            return user.account === this.ruleForm2.account &&
+            return user.phone === this.ruleForm2.phone &&
             user.pass === this.ruleForm2.pass
           })
           if(result.length>0){
@@ -102,7 +101,7 @@
               })
              setTimeout(()=>{
               this.$store.commit('userAction',{success:false,msg:"",loginstatus:true,
-                account:result[0].account})
+                phone:result[0].phone})
               this.$store.commit("setPopLog",{LogisShow:false,nav:1})
             },1000)
           }else{
@@ -112,7 +111,7 @@
               })
             setTimeout(()=>{
               this.$store.commit('userAction',{success:false,msg:"",loginstatus:false,
-                account:""})
+                phone:""})
             },1000)
           }
          

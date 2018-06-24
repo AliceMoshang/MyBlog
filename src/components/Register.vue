@@ -15,7 +15,7 @@
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-dengluyonghu c9"></div>
-      <input type="text" placeholder="手机号" class="pl-10 flex-1" v-model="ruleForm2.account" @blur="checkAccount" >
+      <input type="text" placeholder="手机号" class="pl-10 flex-1" v-model="ruleForm2.phone" @blur="checkAccount" >
     </div>
 
     <div class="pd-15 bb dis-box">
@@ -44,9 +44,11 @@
         message:'',
         ruleForm2: {
           pass: '',
-          account:'',
+          phone:'',
           checkpass:''
         },
+        // userExist:""
+        users:[]
       }
     },
     mounted(){
@@ -67,14 +69,14 @@
       },
       checkAccount(){
         //检查用户名，并限制为手机号
-        let res1= checkData('phone',this.ruleForm2.account)
+        let res1= checkData('phone',this.ruleForm2.phone)
         this.message = res1.msg
         if(res1.status == true){
           this.$http.get('/BlogUsers.json').then(res=>{
               // console.log(6666,res.data)
               for(let key in res.data){
                 // console.log(res.data[key])
-                if(res.data[key].account ===this.ruleForm2.account){
+                if(res.data[key].phone ===this.ruleForm2.phone){
                   this.message = "用户名已存在"
                   return
                 }
@@ -84,28 +86,23 @@
         }          
       },
       apply(){
+        //获取注册时间
+        let re_Ctime = getCtime()
+        console.log(4532,re_Ctime)
         let data={
-          account:this.ruleForm2.account,
+          phone:this.ruleForm2.phone,
           pass:this.ruleForm2.pass,
           checkpass:this.ruleForm2.checkpass,
+          name:"",
+          email:"",
+          type:"0",
+          datestr:re_Ctime.DateStr,
+          timestr:re_Ctime.TimeStr,
+          hidden: false,
         }
-        //检查用户名，并限制为手机号和邮箱
-        let re_account = checkData('phone',this.ruleForm2.account)
-        this.message = re_account.msg
-        if(re_account.status == true){
-          this.$http.get('/BlogUsers.json').then(res=>{
-              console.log(777,res.data)
-              for(let key in res.data){
-                // console.log(res.data[key])
-                if(res.data[key].account ===this.ruleForm2.account){
-                  this.message = "用户名已存在"
-                  return
-                }
-              }
-          })
-        }
+        console.log(888,data)
         // 必填项不能为空
-        let nec = ['account', 'pass','checkpass']
+        let nec = ['phone', 'pass','checkpass']
         let rs = checkData('complement', data, nec)
         if(!rs.status){
           this.message = rs.msg
@@ -119,15 +116,44 @@
           this.message = ""
         }
 
-        this.$http.post('/BlogUsers.json',data).then(res=>{
-          // console.log(11,res.data)
-          this.$store.commit('userAction',{success:true,msg:"注册成功！"})
-          setTimeout(()=>{
-            this.$store.commit('userAction',{success:false,msg:""})
-            this.$store.commit("setPopLog",{LogisShow:true,nav:1})
-            this.$store.commit("setPopReg",{RegisShow:false,nav:1})
-          },1000)
-        })
+        //检查用户名，并限制为手机号
+        let re_phone = checkData('phone',this.ruleForm2.phone)
+        this.message = re_phone.msg
+
+        if(re_phone.status == true){
+          this.$http.get('/BlogUsers.json').then((res)=>{
+              for(let key in res.data){
+                this.users.push(res.data[key])
+              }
+              let re_user = this.users.filter((user)=>{
+                  return user.phone === this.ruleForm2.phone
+              })
+              console.log(66666,re_user)//为对象组成的数组
+              if(re_user.length>0){
+                this.message = "用户名已存在!"
+                return
+              }else{
+                console.log(989898,data)
+                this.$http.post('/BlogUsers.json',data).then((res)=>{
+                  console.log(11,res.data)
+                  console.log(24324234,data)
+
+                  this.$store.commit('userAction',{success:true,msg:"注册成功！!"})
+                  this.$store.commit('addUserItems',data)
+
+                  setTimeout(()=>{
+                    this.$store.commit('userAction',{success:false,msg:""})
+                    this.$store.commit("setPopLog",{LogisShow:true,nav:1})
+                    this.$store.commit("setPopReg",{RegisShow:false,nav:1})
+                  },1000)
+                })
+              }
+          })          
+        }return
+       
+        
+        
+
       }
       
     }

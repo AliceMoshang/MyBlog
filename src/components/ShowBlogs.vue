@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'show-blogs',
   data(){
@@ -42,6 +41,7 @@ export default {
       search:''
     }
   },
+ 
   created(){
     //vue-resource方式请求
     // this.$http.get('https://wd2206394391jwoklu.wilddogio.com/Aposts.json').then(res=>{
@@ -63,7 +63,7 @@ export default {
     // })
 
     // axios请求
-    axios.get('https://wd2206394391jwoklu.wilddogio.com/Aposts.json').then(res=>{
+    this.$http.get('https://wd2206394391jwoklu.wilddogio.com/Aposts.json').then(res=>{
         console.log(777,res.data)
       var blogsArray = [];
       for (let key in res.data){

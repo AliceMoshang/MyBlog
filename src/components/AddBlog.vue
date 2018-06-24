@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'add-blog',
   data () {
@@ -70,8 +69,9 @@ export default {
       submitie: true
     }
   },
+  
   computed:{
-    account(){
+    phone(){
       return this.$store.getters.getAccount
     }
   },
@@ -83,9 +83,9 @@ export default {
         content: this.blog.content,
         category: this.blog.category,
         author: this.blog.author,
-        account: this.account
+        phone: this.phone
       }     
-      axios.post("/Aposts.json",data).then((data)=>{
+      this.$http.post("/Aposts.json",data).then((data)=>{
           this.submitie = false
       })
     }

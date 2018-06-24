@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 	export default {
 		name:'single-blog',
 		data(){
@@ -50,15 +49,15 @@ import axios from 'axios'
 			loginstatus(){
 				return this.$store.state.loginstatus
 			},
-			account(){
-				return this.$store.state.account
+			phone(){
+				return this.$store.state.phone
 			}
 		},
 		created(){
-			axios.get('/Aposts/'+this.id+'.json').then((res)=> {
+			this.$http.get('/Aposts/'+this.id+'.json').then((res)=> {
 				// console.log(888,res.data)
 				this.blog = res.data
-				this.blogaccount = res.data.account
+				this.blogaccount = res.data.phone
 			})
 		},
 		methods:{
@@ -67,20 +66,20 @@ import axios from 'axios'
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
-					if(this.blogaccount !== this.account){
+					if(this.blogaccount !== this.phone){
 						// console.log('他人文章无权限删除')
 						this.msgState = true
 						this.stateMessage ="他人文章无权删除!"
 
 					}else{
-						axios.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json')
+						this.$http.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json')
 						.then(res=>{
 							this.$router.push({path:'/'}) //删除成功跳转到主页
 						})
 					}
 				}
-				// if(this.loginstatus == true && this.blogaccount == this.account){
-				// 	axios.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json').then(res=>{
+				// if(this.loginstatus == true && this.blogaccount == this.phone){
+				// 	this.$http.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json').then(res=>{
 				// 	this.$router.push({path:'/'}) //删除成功跳转到主页
 				// 	})
 				// }else{
@@ -89,14 +88,14 @@ import axios from 'axios'
 				// }				
 			},
 			edit(){
-				// console.log(66,this.account)
+				// console.log(66,this.phone)
 				// console.log(67,this.loginstatus)
 				// console.log(77,this.id)
 				if(this.loginstatus == null || this.loginstatus == false){
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
-					if(this.blogaccount !== this.account){
+					if(this.blogaccount !== this.phone){
 						this.msgState = true
 						this.stateMessage ="他人文章无权编辑!"
 

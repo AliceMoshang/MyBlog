@@ -101,7 +101,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default{
 	name:'admin',
 	data(){
@@ -142,7 +141,7 @@ export default{
 		}
 	},
 	mounted(){
-		axios.get('/BlogUsers.json').then(res=>{
+		this.$http.get('/BlogUsers.json').then(res=>{
 			// console.log(777,res.data)
 			let UserArr = []
 			for(let key in res.data){
@@ -160,7 +159,7 @@ export default{
 		
 		update(item){
 			// console.log(645,item)
-			axios.put('/BlogUsers/'+item.id+'.json',item).then(res=>{
+			this.$http.put('/BlogUsers/'+item.id+'.json',item).then(res=>{
 				console.log(7474,res.data)
 				this.botMsg = "权限更改成功"
 				item.hidden = true
@@ -170,7 +169,7 @@ export default{
 			item.hidden = !item.hidden
 		},
 		deleteUser(item){
-			axios.delete('/BlogUsers/'+item.id+'.json').then(res=>{
+			this.$http.delete('/BlogUsers/'+item.id+'.json').then(res=>{
 				this.$store.commit('deleteUserItems',item)
 		})
 		},
@@ -179,10 +178,10 @@ export default{
 			// console.log(661)
 				this.botMsg = re_phone.msg
 				if(re_phone.status == true){
-		          axios.get('/BlogUsers.json').then(res=>{
+		          this.$http.get('/BlogUsers.json').then(res=>{
 		              // console.log(6666,res.data)
 		              for(let key in res.data){
-		                if(res.data[key].account === this.newUsers.phone){
+		                if(res.data[key].phone === this.newUsers.phone){
 		                  this.botMsg = "该手机已被注册"
 		                  return
 		                }
@@ -196,7 +195,7 @@ export default{
 			console.log(888)
 				this.botMsg = re_email.msg
 				if(re_email.status == true){
-		         axios.get('/BlogUsers.json').then(res=>{
+		         this.$http.get('/BlogUsers.json').then(res=>{
 		              console.log(6666,res.data)
 		              for(let key in res.data){
 		                // console.log(res.data[key])
@@ -209,6 +208,7 @@ export default{
 		          return
 		        }
 		},
+		//添加用户
 		post(){
 			let data = {
 				name: this.newUsers.name,
@@ -231,13 +231,12 @@ export default{
 				this.checkEmail(data.email)
 			}
 			
-			
-			
 			this.newUsers.hidden = false
 			console.log(55,this.newUsers)
 			let data1={
 				name: data.name,
 				pass: data.pass,
+				checkpass:"",
 				phone: data.phone,
 				email: data.email,
 				type: data.type,
@@ -247,7 +246,7 @@ export default{
 			}
 			console.log(44,data1)
 			
-			axios.post('BlogUsers.json',data1).then(res=>{
+			this.$http.post('BlogUsers.json',data1).then(res=>{
 				this.botMsg = "添加用户成功！"
 				// console.log(res.data.name)
 				data1.id =res.data.name
@@ -269,12 +268,14 @@ export default{
 			DateArray[1] = d.getMonth() +1
 			DateArray[2] = d.getDate()
 			let DateStr = DateArray.join("/")
+			//获取日期DateStr，2018/6/24
 			this.DateStr = DateStr
 			let TimeArray =[]
 			TimeArray[0] = d.getHours()
 			TimeArray[1] = d.getMinutes()
 			TimeArray[2] = d.getSeconds()
 			let TimeStr = TimeArray.join(":")
+			//获取时间TimeStr，16：38：39
 			this.TimeStr = TimeStr
 		}
 	}

@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'add-blog',
   data () {
@@ -81,13 +80,13 @@ export default {
   },
   methods:{
   	fetchData(){
-  		axios.get("/Aposts/"+this.id+'.json').then(res=>{
+  		this.$http.get("/Aposts/"+this.id+'.json').then(res=>{
   			console.log(111,res.data)
   			this.blog= res.data
   		})
   	},
     post(){
-      axios.put("/Aposts/"+this.id+'.json',this.blog).then((data)=>{
+      this.$http.put("/Aposts/"+this.id+'.json',this.blog).then((data)=>{
           console.log(data)
           this.submitie = false
           setTimeout(()=>{

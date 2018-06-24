@@ -16,7 +16,7 @@ Vue.config.productionTip = false
 
 //全局配置axios
 axios.defaults.baseURL='https://wd2206394391jwoklu.wilddogio.com'
-
+Vue.prototype.$http =axios
 // axios.defaults.headers.common['Authorization'] = 'Token' //配置头部信息
 // axios.defaults.headers.post['Content-type'] = 'application/urlencode' //post请求头
 // axios.defaults.headers.get['Accepts'] = 'application/json' //get请求头
@@ -230,3 +230,26 @@ new Vue({
 		}
 			
 	}
+//获取当前时间
+window.getCtime = function(){
+			let d = new Date()		
+			let DateArray =[]		
+			DateArray[0] = d.getFullYear()
+			DateArray[1] = d.getMonth() +1
+			DateArray[2] = d.getDate()
+			let DateStr = DateArray.join("/")
+			let TimeArray =[]
+			TimeArray[0] = d.getHours()
+			TimeArray[1] = d.getMinutes()
+			TimeArray[2] = d.getSeconds()
+			let TimeStr = TimeArray.join(":")
+			return{
+				DateStr:DateStr,
+				TimeStr:TimeStr,
+				FullTime:DateStr+" "+TimeStr
+			}//获取日期DateStr，2018/6/24
+			//获取时间TimeStr，16：38：39
+			// console.log(DateStr+"-"+TimeStr)
+		}
+
+

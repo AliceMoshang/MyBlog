@@ -42,7 +42,8 @@
 				blog:{},
 				blogaccount:'',
 				stateMessage:'',
-				msgState: false
+				msgState: false,
+				type:''
 			}
 		},
 		computed:{
@@ -51,13 +52,30 @@
 			},
 			phone(){
 				return this.$store.state.phone
-			}
+			},
+			// type(){
+			// 	return this.$store.state.type
+			// }
 		},
 		created(){
 			this.$http.get('/Aposts/'+this.id+'.json').then((res)=> {
-				// console.log(888,res.data)
+				console.log(888,res.data)
 				this.blog = res.data
 				this.blogaccount = res.data.phone
+			})
+			
+		},
+		mounted(){
+			this.$http.get('/BlogUsers.json').then(res=>{
+				let users = []
+				for(let key in res.data){
+					users.push(res.data[key])
+				}
+				let result = users.filter((user)=>{
+					return user.phone == this.phone
+				})
+				this.type = result[0].type
+
 			})
 		},
 		methods:{
@@ -66,7 +84,7 @@
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
-					if(this.blogaccount !== this.phone){
+					if(this.type==0 && this.blogaccount !== this.phone){
 						// console.log('他人文章无权限删除')
 						this.msgState = true
 						this.stateMessage ="他人文章无权删除!"
@@ -78,14 +96,7 @@
 						})
 					}
 				}
-				// if(this.loginstatus == true && this.blogaccount == this.phone){
-				// 	this.$http.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json').then(res=>{
-				// 	this.$router.push({path:'/'}) //删除成功跳转到主页
-				// 	})
-				// }else{
-				// 	// console.log('未登录')
-				// 	this.$store.commit("setPopLog",{LogisShow:true,nav:1})
-				// }				
+								
 			},
 			edit(){
 				// console.log(66,this.phone)
@@ -95,10 +106,9 @@
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
-					if(this.blogaccount !== this.phone){
+					if( this.type==0 && this.blogaccount !== this.phone){
 						this.msgState = true
 						this.stateMessage ="他人文章无权编辑!"
-
 					}else{
 						this.$router.push({path:'/edit',query:{cid:this.id}})
 					}

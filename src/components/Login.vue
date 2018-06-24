@@ -94,11 +94,10 @@
             return user.phone === this.ruleForm2.phone &&
             user.pass === this.ruleForm2.pass
           })
+
           if(result.length>0){
-            this.$store.commit('userAction',
-              {success:true,
-              msg:"登录成功！",
-              })
+            this.$router.push('/')
+            this.$store.commit('userAction',{success:true,msg:"登录成功！",type:result[0].type})
              setTimeout(()=>{
               this.$store.commit('userAction',{success:false,msg:"",loginstatus:true,
                 phone:result[0].phone})

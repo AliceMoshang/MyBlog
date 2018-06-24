@@ -1,62 +1,6 @@
 <template>
 	<div id="admin" >
-		<div class="fs14 fw-b pd-10 c6 mb-5 bg-white title" >所有用户</div>
-		<div class="wrapper w-full">
-			
-			<table cellspacing="0">
-				<tr class="t_head">
-					<th style="width: 62px;"></th>
-					<th style="width: 130px;">日期</th>
-					<th style="width: 100px;">姓名</th>
-					<th style="width: 122px;">手机号</th>
-					<th style="width: 168px;">邮箱</th>
-					<th style="width: 123px;">
-						<div class="dis-box justify-content-center">
-							<div class="pr-10 c6">权限</div>
-							<div class="dis-box flex-direction-column">
-								<div class="el-icon-caret-top"></div>
-								<div class="el-icon-caret-bottom"></div>
-							</div>
-						</div>
-					</th>
-					<th style="width: 90px;">更新修改</th>
-					<th style="width: 70px;">编辑</th>
-				</tr>
-				<tr v-for="item in tableData">
-					<td style="width: 62px;" class="firsticon"><span class="el-icon-remove-outline minus pointer" @click="deleteUser(item)"></span></td>
-					<td style="width: 130px;">{{item.datestr}} {{item.timestr}}</td>
-					<td style="width: 100px;">{{item.name}}</td>
-					<td style="width: 122px;">{{item.phone}}</td>
-					<td style="width: 168px;">{{item.email}}</td>
-					<td style="width: 123px;">
-						<el-select v-model="item.type"  style="width: 93px;"  v-bind:disabled="item.hidden">
-							<el-option
-							v-for="item in options"
-							:key="item.value"
-							:label="item.label"
-							:value="item.value">
-							</el-option>
-						</el-select>
-					</td>
-					<td style="width: 90px;"><span class="el-icon-setting pointer" @click="update(item)"></span></td>
-					<td style="width: 70px;"><span class="el-icon-setting pointer" @click="modify(item)"></span></td>
-				</tr>
-			</table>
-
-			<!-- <div class="tips dis-box justify-content-center flex-direction-column" v-if="tipShow">
-
-				<div class="fs14 pb-30 pt-10 el-icon-warning c9"><span class="pl-10 fs14 c6">{{tipMsg}}</span></div>
-				<div class="dis-box" >
-					<div class="btn-block btn-quit mr-30" @click="quit">取消</div>
-					<div class="btn-block btn-confirm" @click="confirm">确认</div>
-				</div>
-		    </div> -->
-		</div>
-		<div v-if="botMsg" class="botMsg mt-5 pt-10 pb-10 pl-10 fs12 el-icon-warning c-main" :class="{gogreen:addSuccess}">
-		<span class="pl-10 c-main fw-b" :class="{gogreen:addSuccess}">{{botMsg}}</span>
-		</div>
-
-		<div class="fs14 fw-b pd-10 c6 mb-5 mt-5 bg-white title" >添加用户</div>
+		<div class="fs14 fw-b pd-10 c6 mb-5 bg-white title icon-unie612 iconfont"><span class="pl-5">添加用户</span></div>
 		<div class="wrapper w-full">
 		    
 		    <table cellspacing="0">
@@ -96,6 +40,63 @@
 				</tr>
 			</table>
 		</div>
+		<div class="fs14 fw-b pd-10 c6 mb-5 mt-5 bg-white title iconfont icon-ai-users"><span class="pl-5">所有用户</span></div>
+		<div class="wrapper w-full">
+			
+			<table cellspacing="0">
+				<tr class="t_head">
+					<th style="width: 62px;"></th>
+					<th style="width: 130px;">日期</th>
+					<th style="width: 100px;">姓名</th>
+					<th style="width: 122px;">手机号</th>
+					<th style="width: 168px;">邮箱</th>
+					<th style="width: 123px;">
+						<div class="dis-box justify-content-center">
+							<div class="pr-10 c6">权限</div>
+							<div class="dis-box flex-direction-column">
+								<div class="el-icon-caret-top"></div>
+								<div class="el-icon-caret-bottom"></div>
+							</div>
+						</div>
+					</th>
+					<th style="width: 90px;">更新修改</th>
+					<th style="width: 70px;">编辑</th>
+				</tr>
+				<tr v-for="item in tableData">
+					<td style="width: 62px;" class="firsticon"><span class="el-icon-remove-outline minus pointer" @click="deleteUser(item)"></span></td>
+					<td style="width: 130px;">{{item.datestr}} {{item.timestr}}</td>
+					<td style="width: 100px;">{{item.name}}</td>
+					<td style="width: 122px;">{{item.phone}}</td>
+					<td style="width: 168px;">{{item.email}}</td>
+					<td style="width: 123px;">
+						<el-select v-model="item.type"  style="width: 93px;"  v-bind:disabled="item.hidden">
+							<el-option
+							v-for="item in options"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+							</el-option>
+						</el-select>
+					</td>
+					<td style="width: 90px;"><span class="iconfont icon-gengxin pointer fs18" @click="update(item)"></span></td>
+					<td style="width: 70px;"><span class="iconfont icon-bianji4 fs16 pointer" @click="modify(item)"></span></td>
+				</tr>
+			</table>
+
+			<!-- <div class="tips dis-box justify-content-center flex-direction-column" v-if="tipShow">
+
+				<div class="fs14 pb-30 pt-10 el-icon-warning c9"><span class="pl-10 fs14 c6">{{tipMsg}}</span></div>
+				<div class="dis-box" >
+					<div class="btn-block btn-quit mr-30" @click="quit">取消</div>
+					<div class="btn-block btn-confirm" @click="confirm">确认</div>
+				</div>
+		    </div> -->
+		</div>
+		<div v-if="botMsg" class="botMsg mt-5 pt-10 pb-10 pl-10 fs12 el-icon-warning c-main" :class="{gogreen:addSuccess}">
+		<span class="pl-10 c-main fw-b" :class="{gogreen:addSuccess}">{{botMsg}}</span>
+		</div>
+
+		
 	
 	</div>
 </template>
@@ -159,18 +160,29 @@ export default{
 		
 		update(item){
 			// console.log(645,item)
+			let rs_type = ""
+			if(item.type==0){
+				rs_type = 1
+			}else{
+				rs_type =0
+			}
 			this.$http.put('/BlogUsers/'+item.id+'.json',item).then(res=>{
 				console.log(7474,res.data)
+
 				this.botMsg = "权限更改成功"
 				item.hidden = true
+
 			})
 		},
 		modify(item){
 			item.hidden = !item.hidden
 		},
 		deleteUser(item){
+			
+			console.log(777,rs_type)
 			this.$http.delete('/BlogUsers/'+item.id+'.json').then(res=>{
 				this.$store.commit('deleteUserItems',item)
+				 
 		})
 		},
 		checkPhone(Phone){

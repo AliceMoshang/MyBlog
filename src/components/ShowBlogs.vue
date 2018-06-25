@@ -1,6 +1,6 @@
 <template>
-  <div v-theme:column="'middle'" id="show-blogs" class="mt-10 blogs">
-    <div class="dis-box justify-content-between bb pd-5">
+  <div v-theme:column="'middle'" id="show-blogs" class="mt-10 blogs ">
+    <div class="dis-box justify-content-between bb pd-5 bg-white">
       <div class="pl-20 fw-b fs18 ">ARTICLES</div>
       <div class="seainpu">
           <input type="text" placeholder="搜索" v-model="search">
@@ -8,10 +8,10 @@
       </div>
     </div> 
 
-    <div class="allblogs">
+    <div class="allblogs bg-white">
       <div class="pl-20 pr-20">
         <div class="single-blog"  v-for="blog in tenBlogs">
-          <router-link :to="'/blog/'+blog.id">
+          <router-link :to="'/blog/'+blog.blogid">
             <!-- <h4 v-rainbow>{{blog.title | to-uppercase}}</h4>  -->
             <h4 class="iconfont icon-wenxue pr-10" >&nbsp{{blog.title | to-uppercase}}</h4> 
             <article class="c9">
@@ -51,15 +51,16 @@ export default {
  
   created(){
     this.$http.get('https://wd2206394391jwoklu.wilddogio.com/Aposts.json').then(res=>{
-        // console.log(777,res.data)
+        console.log(777,res.data)
       let blogsArray = [];
       for (let key in res.data){
-        res.data[key].id = key
+        res.data[key].blogid = key
         blogsArray.push(res.data[key])
       }
       this.blogs = blogsArray 
       this.total = blogsArray.length
       this.tenBlogs = blogsArray.slice(0,10)
+      console.log(this.tenBlogs)
       //取数组中的前10个对象，起始index是0，终止Index是10，
       //包含index为0的对象，不包含index为10的对象
     })

@@ -111,10 +111,10 @@ export default {
   padding: 0 0.555556rem;
 }
 .el-input__inner{
-  height: 1.47rem !important;
-    line-height: 1.47rem !important;
+  height: 30px !important;
+    line-height: 30px !important;
 } 
 .el-input__icon{
-  line-height: 1.47rem !important;
+  line-height: 30px !important;
 }
 </style>

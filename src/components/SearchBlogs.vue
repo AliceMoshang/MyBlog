@@ -1,6 +1,6 @@
 <template>
 	<div class="blogs mt-10" v-theme:column="'middle'">
-	  <div class="pl-20 fw-b fs18 pd-5 bb">SEARCHED ARTICLES</div>
+	  <div class="pl-20 fw-b fs16 pd-5 bb">SEARCHED ARTICLES</div>
       <div class="pl-20 pr-20">
 
         <div class="single-blog"  v-for="blog in tenBlogs">
@@ -29,9 +29,10 @@
 <script>
 	export default{
 		name:'searchblogs',
+
 		data(){
 			return{
-				tenBlogs:[]
+				// tenBlogs:[]
 			}
 		},
 		computed:{
@@ -40,12 +41,13 @@
 			},
 			total(){
 				return this.filteredBlogs.length
+			},
+			tenBlogs(){
+				return this.filteredBlogs.slice(0,10)
 			}
 
 		},
-		created(){
-			this.tenBlogs = this.filteredBlogs.slice(0,10)
-		},
+		
 		methods:{
 			handleCurrentChange(val) {
 		        let n = `${val}`

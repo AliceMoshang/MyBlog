@@ -20,12 +20,12 @@
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-mima c9"></div>
-      <input type="text" placeholder="密码" class="pl-10 flex-1" v-model="ruleForm2.pass">
+      <input type="password" placeholder="密码" class="pl-10 flex-1" v-model="ruleForm2.pass">
     </div>
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-mima c9"></div>
-      <input type="text" placeholder="确认密码" class="pl-10 flex-1" v-model="ruleForm2.checkpass">
+      <input type="password" placeholder="确认密码" class="pl-10 flex-1" v-model="ruleForm2.checkpass">
     </div>
 
   </div>
@@ -51,9 +51,7 @@
         users:[]
       }
     },
-    updated(){
-        document.getElementById('r_account').focus();
-    },
+   
     computed:{
       nav(){
         return this.$store.state.nav
@@ -93,7 +91,7 @@
           phone:this.ruleForm2.phone,
           pass:this.ruleForm2.pass,
           checkpass:this.ruleForm2.checkpass,
-          name:"",
+          cname:"",
           email:"",
           ctype:"0",
           datestr:re_Ctime.DateStr,

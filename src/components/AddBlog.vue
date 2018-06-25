@@ -20,16 +20,11 @@
             </select> -->
             <input type="text" v-model="blog.author" class="flex-1">
           </div>
-          <div class="dis-box justify-content-between pb-5">
-              <div id="checkboxes">
-                <label for=""><span class="fw-b pr-10">CATEGORY：</span> Vue.js</label>
-                <input type="checkbox" value="Vue.js" v-model="blog.category">
-                <label for="">Node.js</label>
-                <input type="checkbox" value="Node.js" v-model="blog.category">
-                <label for="">React.js</label>
-                <input type="checkbox" value="React.js" v-model="blog.category">
-                <label for="">Angular4.js</label>
-                <input type="checkbox" value="Angular4.js" v-model="blog.category">
+          <div class="dis-box justify-content-between pb-5 align-item-bottom">
+              <div id="checkboxes " class="bb dis-box " style="width: 56%">
+                 <span class="fw-b fs14">CATEGORY：</span>
+                
+                <input type="text" v-model="blog.category" >
               </div>  
               <button @click.prevent="post" class="btn-block bg-grey">AddBlog<i class="iconfont icon-bokenormal  pl-5"></i></button>
           </div> 
@@ -38,7 +33,7 @@
     </form>
 
     <div v-if="!submitie" v-theme:column="'middle'" style="background: #f6f6f6">
-      <div class="botMsg mt-5 pt-10 pb-10 pl-10 fs12 el-icon-warning c-green" :class="{gogreen:addSuccess}">
+      <div class="botMsg mt-5 pt-10 pb-10 pl-10 fs12 el-icon-warning c-green">
       <span class="pl-10 c-green" >您的博客发布成功！</span>
       </div>
     </div>
@@ -51,7 +46,7 @@
       <label class="fs12 pt-10 fs-inta c9"><span class="pr-10 c9">Author:</span>{{blog.author}}</label>
       </br>
       <label class="pr-10 c9 fs12 fs-inta">Category:</label>
-      <label v-for="item in blog.category" class="fs12 fs-inta c9">{{item}}</label>
+      <label class="fs12 fs-inta c9">{{blog.category}}</label>
     </div>
 
   </div>
@@ -65,7 +60,7 @@ export default {
       blog: {
         title:'',
         content:'',
-        category:[],
+        category:'',
         author:""
       },
       authors:['请选择','helen','chric','alice'],
@@ -75,6 +70,9 @@ export default {
   computed:{
     phone(){
       return this.$store.getters.getAccount
+    },
+    cid(){
+      return this.$store.state.cid
     }
   },
   mounted(){
@@ -88,8 +86,10 @@ export default {
         content: this.blog.content,
         category: this.blog.category,
         author: this.blog.author,
-        phone: this.phone
-      }     
+        phone: this.phone,
+        cid: this.cid
+      }  
+      console.log('4444',this.cid)   
       this.$http.post("/Aposts.json",data).then((data)=>{
           this.submitie = false
           setTimeout(()=>{
@@ -123,7 +123,8 @@ label{
 }
 #checkboxes input{
   font-size: 12px;
-  margin: 0;
+  margin: 0 !important;
+  width: 100%;
 } 
 #preview{
   box-sizing: border-box;

@@ -20,7 +20,7 @@
             </select> -->
             <input type="text" v-model="blog.author" class="flex-1">
           </div>
-          <div class="dis-box justify-content-between pb-5">
+          <!-- <div class="dis-box justify-content-between pb-5">
               <div id="checkboxes">
                 <label for=""><span class="fw-b pr-10">CATEGORY：</span> Vue.js</label>
                 <input type="checkbox" value="Vue.js" v-model="blog.category">
@@ -30,6 +30,14 @@
                 <input type="checkbox" value="React.js" v-model="blog.category">
                 <label for="">Angular4.js</label>
                 <input type="checkbox" value="Angular4.js" v-model="blog.category">
+              </div>  
+              <button @click.prevent="post" class="btn-block bg-grey">Update<i class="iconfont icon-bokenormal  pl-5"></i></button>
+          </div>  -->
+          <div class="dis-box justify-content-between pb-5 align-item-bottom">
+              <div id="checkboxes " class="bb dis-box " style="width: 56%">
+                 <span class="fw-b fs14">CATEGORY：</span>
+                
+                <input type="text" v-model="blog.category" >
               </div>  
               <button @click.prevent="post" class="btn-block bg-grey">Update<i class="iconfont icon-bokenormal  pl-5"></i></button>
           </div> 
@@ -49,7 +57,7 @@
         <label class="fs12 pt-10 fs-inta c9"><span class="pr-10 c9">Author:</span>{{blog.author}}</label>
         </br>
         <label class="pr-10 c9 fs12 fs-inta">Category:</label>
-        <label v-for="item in blog.category" class="fs12 fs-inta c9">{{item}}</label>
+        <label class="fs12 fs-inta c9">{{blog.category}}</label>
       </div>
       
     </div>
@@ -62,31 +70,32 @@ export default {
   name: 'add-blog',
   data () {
     return {
-    	id:"",
+    	cid:"",
       blog: {},
       authors:['请选择','helen','chric','alice'],
-      submitie: true
+      submitie: true,
+      blogid:''
     }
   },
   mounted(){
     // alert(1)
-    console.log(443,this.$route.query.cid)
-    if(this.$route.query.cid){
-      this.id = this.$route.query.cid
-      console.log(24521,this.id)
+    console.log(443,this.$route.query.blogid)
+    if(this.$route.query.blogid){
+      this.blogid = this.$route.query.blogid
+      console.log(24521,this.blogid)
     }
-    console.log(2323,this.id)
+    console.log(2323,this.blogid)
   	this.fetchData()
   },
   methods:{
   	fetchData(){
-  		this.$http.get("/Aposts/"+this.id+'.json').then(res=>{
+  		this.$http.get("/Aposts/"+this.blogid+'.json').then(res=>{
   			console.log(111,res.data)
   			this.blog= res.data
   		})
   	},
     post(){
-      this.$http.put("/Aposts/"+this.id+'.json',this.blog).then((data)=>{
+      this.$http.put("/Aposts/"+this.blogid+'.json',this.blog).then((data)=>{
           console.log(data)
           this.submitie = false
           setTimeout(()=>{

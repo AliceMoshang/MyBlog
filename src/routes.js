@@ -4,12 +4,12 @@ import SingleBlog from './components/SingleBlog.vue'
 import EditBlog from './components/EditBlog.vue'
 import Admin from './components/Admin.vue'
 import SearchBlogs from './components/SearchBlogs.vue'
+import UserCenter from './components/UserCenter.vue'
 import {store} from './store/store.js'
 
 export default [
 
-	{path:'/admin',component:Admin
-	,beforeEnter:(to,from,next)=>{
+	{path:'/admin',component:Admin,beforeEnter:(to,from,next)=>{
 		// console.log('011',store.state.loginstatus)
 		if(store.state.loginstatus == true){
 			// console.log('0112',store.state.ctype)
@@ -25,15 +25,29 @@ export default [
 			
 		}else{
 			// 未登录提示登录
-			store.commit('userAction',{success:true,msg:"请登录"})
+			store.commit('popMessage',{success:true,msg:"请登录"})
 			setTimeout(()=>{
-				store.commit('userAction',{success:false,msg:""},1000)
-			})
-			store.commit("setPopLog",{LogisShow:true,nav:1})
+				store.commit('popMessage',{success:false,msg:""})
+				store.commit("setPopLog",{LogisShow:true,nav:1})
+			},1000)
+			
 		}
 	}
-},
-	{path:'/',component:ShowBlogs},
+	},
+	{path:'/',component: ShowBlogs},
+	{path:'/user',component:UserCenter,
+		beforeEnter:(to,from,next)=>{
+		if(store.state.loginstatus== true){
+			next()
+		}else{
+			store.commit('popMessage',{success:true,msg:"请登录"})
+			setTimeout(()=>{
+				store.commit('popMessage',{success:false,msg:""},1000)
+				store.commit("setPopLog",{LogisShow:true,nav:1})
+			},1000)
+			
+		}
+	}},
 	{path:'/search',component:SearchBlogs},
 	{path:'/add',component:AddBlog,beforeEnter:(to,from,next)=>{
 		// console.log('044',store.state.loginstatus)
@@ -42,10 +56,14 @@ export default [
 			next()
 		}else{
 			// console.log('未登录add')
-			store.commit("setPopLog",{LogisShow:true,nav:1})
+			store.commit('popMessage',{success:true,msg:"请登录"})
+			setTimeout(()=>{
+				store.commit('popMessage',{success:false,msg:""},1000)
+				store.commit("setPopLog",{LogisShow:true,nav:1})
+			},1000)
 		}
 	}},
-	{path:'/blog/:id',component:SingleBlog},
+	{path:'/blog/:blogid',component:SingleBlog},
 	{path:'/edit',component:EditBlog},
 
 ]

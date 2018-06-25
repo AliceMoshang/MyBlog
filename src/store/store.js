@@ -12,7 +12,7 @@ export const store= new Vuex.Store({
 		phone:'', //当前登陆的用户
 		loginstatus:null,//登陆状态
 		UserItems:[],//admin中使用到,注册时候或者在admin添加用户时候写入state里用户信息
-
+		cid:"",
 		ctype:"",//当前用户的类型，0为普通用户，1为管理员
 		filteredBlogs:[]//searchblogs组件需要的数据，点击搜索按钮时候传入该数据
 
@@ -35,6 +35,7 @@ export const store= new Vuex.Store({
 			state.loginstatus = data.loginstatus
 			state.phone = data.phone
 			state.ctype = data.ctype
+			state.cid = data.cid
 		},
 		popMessage(state,data){
 			state.success = data.success

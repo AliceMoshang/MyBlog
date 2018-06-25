@@ -44,9 +44,7 @@
         },
       }
     },
-    updated(){
-       document.getElementById('account').focus();
-    },
+   
     computed:{
       nav(){
         return this.$store.state.nav
@@ -89,7 +87,7 @@
           // console.log(11,res.data)
           let users = []
           for (let key in res.data){
-            res.data[key].id = key
+            res.data[key].cid = key
             users.push(res.data[key])
           }
           let result = users.filter((user)=>{
@@ -98,17 +96,16 @@
           })
 
 
-          // console.log(4343,result)
-          // if(result.length>0){
-            
-          //   this.$store.commit('userAction',{success:true,msg:"登录成功！",ctype:result[0].ctype,phone:result[0].phone,loginstatus:true})
-
+          console.log(4343,result)
+        
           if(result.length>0){
+            this.$store.commit('popMessage',{success:true,msg:"登录成功！"})
             this.$store.commit('userAction',
-              {success:true,
-              msg:"登录成功！",
+              {
               loginstatus:true,
-              phone:result[0].phone,ctype:result[0].ctype
+              phone:result[0].phone,
+              ctype:result[0].ctype,
+              cid:result[0].cid
               })
             
              setTimeout(()=>{

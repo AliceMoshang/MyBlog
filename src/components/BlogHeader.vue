@@ -24,13 +24,16 @@
 				<router-link  to="/" exact>OVERVIEW</router-link>
 			</div>
 			
-			<div class="fw-b cf ">&nbsp</div>
+			<!-- <div class="fw-b cf ">&nbsp</div> -->
 			<div>
 				<router-link to="/add" exact>ADDBLOG</router-link>	
 			</div>
-			<div class="fw-b cf ">&nbsp</div>
-			<div>
+			<!-- <div class="fw-b cf ">&nbsp</div> -->
+			<div v-if="this.$store.state.ctype==1">
 				<router-link to="/admin" exact>ADMIN</router-link>	
+			</div>
+			<div>
+				<router-link to="/user" exact>USER</router-link>	
 			</div>
 			
 		</nav>
@@ -109,7 +112,6 @@
 	}	
 	a{
 		display: inline-block;
-		width: 80px;
 		color: #eee;
 		font-weight: bold;
 		text-decoration: none;

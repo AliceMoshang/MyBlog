@@ -2,30 +2,30 @@
 	<div id="admin" >
 
 
-		<div class="fs14 fw-b pd-10 c6 mb-5 bg-white title icon-unie612 iconfont"><span class="pl-5">添加用户</span></div>
+		<div class="fs16 fw-b pd-10 c6 mb-5 bg-white title icon-unie612 iconfont"><span class="pl-5">添加用户</span></div>
 		<div class="wrapper w-full">
 		    
 		    <table cellspacing="0">
 				<tr class="t_head">
-					<th style="width: 82px;">日期</th>
-					<th style="width: 120px;">姓名</th>
-					<th style="width: 120px;">手机号</th>
-					<th style="width: 120px;">密码</th>
-					<th style="width: 168px;">邮箱</th>
-					<th style="width: 123px;">权限</th>
-					<th style="width: 86px;">提交</th>
+					<th style="width: 4.555556rem;">日期</th>
+					<th style="width: 6.666667rem;">姓名</th>
+					<th style="width: 6.666667rem;">手机号</th>
+					<th style="width: 6.666667rem;">密码</th>
+					<th style="width: 9.333333rem;">邮箱</th>
+					<th style="width: 6.833333rem;">权限</th>
+					<th style="width: 4.777778rem;">提交</th>
 				</tr>
 				<tr >
-					<td style="width: 82px;" class="firsticon">{{DateStr}} {{TimeStr}}</td>
-					<td style="width: 100px;"><input type="text" placeholder="请输入" v-model="newUsers.name" ></td>
-					<td style="width: 100px;">
+					<td style="width: 4.555556rem;" class="firsticon">{{DateStr}} {{TimeStr}}</td>
+					<td style="width: 6.666667rem;"><input type="text" placeholder="请输入" v-model="newUsers.name" ></td>
+					<td style="width: 6.666667rem;">
 						<input type="text" placeholder="必填" v-model="newUsers.phone" @blur="checkPhone(newUsers.phone)">
 					</td>
-					<td style="width: 102px;">
+					<td style="width: 6.666667rem;">
 						<input type="password" placeholder="必填" v-model="newUsers.pass" >
 					</td>
-					<td style="width: 168px;"><input type="text" placeholder="请输入" v-model="newUsers.email" @blur="checkEmail(newUsers.email)"></td>
-					<td style="width: 123px;">
+					<td style="width: 9.333333rem;"><input type="text" placeholder="请输入" v-model="newUsers.email" @blur="checkEmail(newUsers.email)"></td>
+					<td style="width: 6.833333rem;">
 						<el-select v-model="newUsers.ctype" placeholder="必选"  style="width: 100px;">
 							<el-option
 							v-for="item in options"
@@ -36,7 +36,7 @@
 						</el-select>
 					</td>
 					
-					<td style="width: 86px;">
+					<td style="width: 4.777778rem;">
 						<span class="post el-icon-success pointer" :class="{gogreen:addSuccess}" @click="post"></span>
 					</td>
 				</tr>
@@ -45,7 +45,7 @@
 		<div v-if="botMsg" class="botMsg mt-5 pt-10 pb-10 pl-10 fs12 el-icon-warning c-main" :class="{gogreen:addSuccess}">
 		<span class="pl-10 c-main" :class="{gogreen:addSuccess}">{{botMsg}}</span>
 		</div>
-		<div class="fs14 fw-b pd-10 c6 mb-5 mt-5 bg-white title iconfont icon-ai-users"><span class="pl-5">所有用户</span></div>
+		<div class="fs16 fw-b pd-10 c6 mb-5 mt-5 bg-white title iconfont icon-ai-users"><span class="pl-5">所有用户</span></div>
 
 		<div class="wrapper w-full">
 			
@@ -53,9 +53,9 @@
 				<tr class="t_head">
 					<th style="width: 62px;"></th>
 					<th style="width: 130px;">日期</th>
-					<th style="width: 100px;">姓名</th>
+					<!-- <th style="width: 100px;">姓名</th> -->
 					<th style="width: 122px;">手机号</th>
-					<th style="width: 168px;">邮箱</th>
+					<!-- <th style="width: 168px;">邮箱</th> -->
 					<th style="width: 123px;">
 						<div class="dis-box justify-content-center">
 							<div class="pr-10 c6">权限</div>
@@ -71,9 +71,9 @@
 				<tr v-for="item in tableData">
 					<td style="width: 62px;" class="firsticon"><span class="el-icon-remove-outline minus pointer" @click="deleteUser(item)"></span></td>
 					<td style="width: 130px;">{{item.datestr}} {{item.timestr}}</td>
-					<td style="width: 100px;">{{item.name}}</td>
+					<!-- <td style="width: 100px;">{{item.name}}</td> -->
 					<td style="width: 122px;">{{item.phone}}</td>
-					<td style="width: 168px;">{{item.email}}</td>
+				<!-- 	<td style="width: 168px;">{{item.email}}</td> -->
 					<td style="width: 123px;">
 						<el-select v-model="item.ctype"  style="width: 93px;"  v-bind:disabled="item.hidden">
 							<el-option
@@ -150,7 +150,7 @@ export default{
 			// console.log(777,res.data)
 			let UserArr = []
 			for(let key in res.data){
-				res.data[key].id = key
+				res.data[key].cid = key
 				
 				UserArr.push(res.data[key])
 				
@@ -166,7 +166,7 @@ export default{
 
 			// console.log(645,item)
 
-			this.$http.put('/BlogUsers/'+item.id+'.json',item).then(res=>{
+			this.$http.put('/BlogUsers/'+item.cid+'.json',item).then(res=>{
 				// console.log(7474,res.data)
 				this.botMsg = "权限更改成功"
 				item.hidden = true
@@ -179,7 +179,7 @@ export default{
 			item.hidden = !item.hidden
 		},
 		deleteUser(item){
-			this.$http.delete('/BlogUsers/'+item.id+'.json').then(res=>{
+			this.$http.delete('/BlogUsers/'+item.cid+'.json').then(res=>{
 				this.$store.commit('deleteUserItems',item)
 		})
 		},
@@ -259,7 +259,7 @@ export default{
 			this.$http.post('BlogUsers.json',data1).then(res=>{
 				this.botMsg = "添加用户成功！"
 				// console.log(res.data.name)
-				data1.id =res.data.name
+				data1.cid =res.data.name
 				// console.log(999,data1)
 				//数据发送到接口并同步到vuex
 				this.$store.commit('addUserItems',data1)
@@ -299,7 +299,7 @@ export default{
 <style scoped>
 #admin{
 	position: relative;
-	max-width: 960px;
+	max-width:  53.333333rem;
 	background: #f6f6f6;
 	margin: 0 auto;
 }
@@ -310,7 +310,7 @@ export default{
 }
 table{
 	background: #fff;
-	width: 960px;
+	width: 53.333333rem;
 	padding: 10px;
 }
 th{

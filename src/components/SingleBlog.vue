@@ -16,7 +16,7 @@
 				<div class="dis-box justify-content-between ">
 					<div>
 						<label class="pr-10 c9 fs12 fs-inta">Category:</label>
-						<label v-for="item in blog.category" class="fs12 fs-inta c9">{{item}}</label>
+      					<label class="fs12 fs-inta c9">{{blog.category}}</label>
 					</div>			
 					<button @click="deleteBlog" class="btn-block mr-10 fs12 ">删除</button>	
 				</div>
@@ -38,7 +38,7 @@
 		name:'single-blog',
 		data(){
 			return{
-				id:this.$route.params.id,
+				blogid:this.$route.params.blogid,
 				blog:{},
 				blogaccount:'',
 				stateMessage:'',
@@ -60,8 +60,9 @@
 
 		},
 		created(){
-			this.$http.get('/Aposts/'+this.id+'.json').then((res)=> {
-				// console.log(888,res.data)
+			console.log(this.$route.params.blogid)
+			this.$http.get('/Aposts/'+this.blogid+'.json').then((res)=> {
+				console.log(888,res.data)
 				this.blog = res.data
 				this.blogaccount = res.data.phone
 			})
@@ -101,7 +102,7 @@
 						this.stateMessage ="他人文章无权删除!"
 
 					}else{
-						this.$http.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json')
+						this.$http.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.blogid+'.json')
 						.then(res=>{
 							this.$store.commit('popMessage',{msg:"删除成功",success:true})
 							setTimeout(()=>{
@@ -136,7 +137,8 @@
 						this.stateMessage ="他人文章无权编辑!"
 
 					}else{
-						this.$router.push({path:'/edit',query:{cid:this.id}})
+						console.log(this.blogid)
+						this.$router.push({path:'/edit',query:{blogid:this.blogid}})
 					}
 				}
 			}

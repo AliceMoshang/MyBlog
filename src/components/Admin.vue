@@ -1,5 +1,6 @@
 <template>
 	<div id="admin" >
+<<<<<<< HEAD
 		<div class="fs14 fw-b pd-10 c6 mb-5 bg-white title icon-unie612 iconfont"><span class="pl-5">添加用户</span></div>
 		<div class="wrapper w-full">
 		    
@@ -41,6 +42,9 @@
 			</table>
 		</div>
 		<div class="fs14 fw-b pd-10 c6 mb-5 mt-5 bg-white title iconfont icon-ai-users"><span class="pl-5">所有用户</span></div>
+=======
+		<div class="fs14 fw-b pd-10 c6 mb-5 bg-white title" >所有用户</div>
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 		<div class="wrapper w-full">
 			
 			<table cellspacing="0">
@@ -78,8 +82,8 @@
 							</el-option>
 						</el-select>
 					</td>
-					<td style="width: 90px;"><span class="iconfont icon-gengxin pointer fs18" @click="update(item)"></span></td>
-					<td style="width: 70px;"><span class="iconfont icon-bianji4 fs16 pointer" @click="modify(item)"></span></td>
+					<td style="width: 90px;"><span class="el-icon-setting pointer" @click="update(item)"></span></td>
+					<td style="width: 70px;"><span class="el-icon-setting pointer" @click="modify(item)"></span></td>
 				</tr>
 			</table>
 
@@ -96,7 +100,46 @@
 		<span class="pl-10 c-main fw-b" :class="{gogreen:addSuccess}">{{botMsg}}</span>
 		</div>
 
-		
+		<div class="fs14 fw-b pd-10 c6 mb-5 mt-5 bg-white title" >添加用户</div>
+		<div class="wrapper w-full">
+		    
+		    <table cellspacing="0">
+				<tr class="t_head">
+					<th style="width: 82px;">日期</th>
+					<th style="width: 120px;">姓名</th>
+					<th style="width: 120px;">手机号</th>
+					<th style="width: 120px;">密码</th>
+					<th style="width: 168px;">邮箱</th>
+					<th style="width: 123px;">权限</th>
+					<th style="width: 86px;">提交</th>
+				</tr>
+				<tr >
+					<td style="width: 82px;" class="firsticon">{{DateStr}} {{TimeStr}}</td>
+					<td style="width: 100px;"><input type="text" placeholder="请输入" v-model="newUsers.name" ></td>
+					<td style="width: 100px;">
+						<input type="text" placeholder="必填" v-model="newUsers.phone" @blur="checkPhone(newUsers.phone)">
+					</td>
+					<td style="width: 102px;">
+						<input type="text" placeholder="必填" v-model="newUsers.pass" >
+					</td>
+					<td style="width: 168px;"><input type="text" placeholder="请输入" v-model="newUsers.email" @blur="checkEmail(newUsers.email)"></td>
+					<td style="width: 123px;">
+						<el-select v-model="newUsers.type" placeholder="必选"  style="width: 100px;">
+							<el-option
+							v-for="item in options"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+							</el-option>
+						</el-select>
+					</td>
+					
+					<td style="width: 86px;">
+						<span class="post el-icon-success pointer" :class="{gogreen:addSuccess}" @click="post"></span>
+					</td>
+				</tr>
+			</table>
+		</div>
 	
 	</div>
 </template>
@@ -159,7 +202,11 @@ export default{
 	methods:{
 		
 		update(item){
+<<<<<<< HEAD
 			console.log(645,item)
+=======
+			// console.log(645,item)
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 			this.$http.put('/BlogUsers/'+item.id+'.json',item).then(res=>{
 				console.log(7474,res.data)
 				this.botMsg = "权限更改成功"

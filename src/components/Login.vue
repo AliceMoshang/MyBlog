@@ -94,10 +94,18 @@
             return user.phone === this.ruleForm2.phone &&
             user.pass === this.ruleForm2.pass
           })
+<<<<<<< HEAD
           console.log(4343,result)
           if(result.length>0){
             
             this.$store.commit('userAction',{success:true,msg:"登录成功！",ctype:result[0].ctype,phone:result[0].phone,loginstatus:true})
+=======
+          if(result.length>0){
+            this.$store.commit('userAction',
+              {success:true,
+              msg:"登录成功！",
+              })
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
              setTimeout(()=>{
               this.$store.commit('userAction',{success:false,msg:""})
               this.$store.commit("setPopLog",{LogisShow:false,nav:1})

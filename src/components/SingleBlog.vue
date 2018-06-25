@@ -42,8 +42,12 @@
 				blog:{},
 				blogaccount:'',
 				stateMessage:'',
+<<<<<<< HEAD
 				msgState: false,
 				ctype:''
+=======
+				msgState: false
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 			}
 		},
 		computed:{
@@ -52,15 +56,20 @@
 			},
 			phone(){
 				return this.$store.state.phone
+<<<<<<< HEAD
 			},
 			
+=======
+			}
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 		},
 		created(){
 			this.$http.get('/Aposts/'+this.id+'.json').then((res)=> {
-				console.log(888,res.data)
+				// console.log(888,res.data)
 				this.blog = res.data
 				this.blogaccount = res.data.phone
 			})
+<<<<<<< HEAD
 			
 		},
 		mounted(){
@@ -80,6 +89,8 @@
 				
 
 			})
+=======
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 		},
 		methods:{
 			deleteBlog(){
@@ -87,7 +98,11 @@
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
+<<<<<<< HEAD
 					if(this.ctype==0 && this.blogaccount !== this.phone){
+=======
+					if(this.blogaccount !== this.phone){
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 						// console.log('他人文章无权限删除')
 						this.msgState = true
 						this.stateMessage ="他人文章无权删除!"
@@ -99,7 +114,14 @@
 						})
 					}
 				}
-								
+				// if(this.loginstatus == true && this.blogaccount == this.phone){
+				// 	this.$http.delete('https://wd2206394391jwoklu.wilddogio.com/Aposts/'+this.id+'.json').then(res=>{
+				// 	this.$router.push({path:'/'}) //删除成功跳转到主页
+				// 	})
+				// }else{
+				// 	// console.log('未登录')
+				// 	this.$store.commit("setPopLog",{LogisShow:true,nav:1})
+				// }				
 			},
 			edit(){
 				// console.log(66,this.phone)
@@ -109,9 +131,14 @@
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
+<<<<<<< HEAD
 					if( this.ctype==0 && this.blogaccount !== this.phone){
+=======
+					if(this.blogaccount !== this.phone){
+>>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
 						this.msgState = true
 						this.stateMessage ="他人文章无权编辑!"
+
 					}else{
 						this.$router.push({path:'/edit',query:{cid:this.id}})
 					}

@@ -2,7 +2,7 @@
   <div id="add-blog" >
 
     
-    <form action="" v-if="submitie" v-theme:column="'middle'" class="mt-10">
+    <form action=""  v-theme:column="'middle'" class="mt-10" v-if="submitie">
       <div class="dis-box bb pt-5">
         <label class="tit "><i class="iconfont icon-wenxue pl-5"></i>BlOGTITLE:</label>
         <input id="blog_titile" type="text" v-model="blog.title" required="" class="flex-1" />
@@ -37,9 +37,12 @@
            
     </form>
 
-    <div v-if="!submitie" v-theme:column="'middle'">
-      <h3  class="pd-10 ">您的博客发布成功！</h3>
+    <div v-if="!submitie" v-theme:column="'middle'" style="background: #f6f6f6">
+      <div class="botMsg mt-5 pt-10 pb-10 pl-10 fs12 el-icon-warning c-green" :class="{gogreen:addSuccess}">
+      <span class="pl-10 c-green" >您的博客发布成功！</span>
+      </div>
     </div>
+    
 
     <div id="preview" v-theme:column="'middle'">
       <label class="tit">PREVIEW</label>
@@ -127,5 +130,12 @@ label{
   box-shadow: 1px 1px 2px #eee;
   padding: 20px;
   margin-bottom: 5px;
+}
+.botMsg{
+  width: 100%;
+  box-sizing: border-box;
+  color: #666;
+  background: #f0f9eb;
+  
 }
 </style>

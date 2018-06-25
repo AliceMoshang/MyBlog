@@ -15,12 +15,12 @@
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-dengluyonghu c9"></div>
-      <input type="text" placeholder="手机号或者邮箱" class="pl-10 flex-1" v-model="ruleForm2.phone" @blur="checkAccount" >
+      <input type="text" id="account" placeholder="手机号或者邮箱" class="pl-10 flex-1" v-model="ruleForm2.phone" @blur="checkAccount" >
     </div>
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-mima c9"></div>
-      <input type="text" placeholder="密码" class="pl-10 flex-1" v-model="ruleForm2.pass">
+      <input type="password" placeholder="密码" class="pl-10 flex-1" v-model="ruleForm2.pass">
     </div>
   </div>
 
@@ -44,7 +44,9 @@
         },
       }
     },
-   
+    updated(){
+       document.getElementById('account').focus();
+    },
     computed:{
       nav(){
         return this.$store.state.nav
@@ -84,7 +86,7 @@
           return
         }
         this.$http.get('/BlogUsers.json',data).then(res=>{
-          console.log(11,res.data)
+          // console.log(11,res.data)
           let users = []
           for (let key in res.data){
             res.data[key].id = key
@@ -94,22 +96,26 @@
             return user.phone === this.ruleForm2.phone &&
             user.pass === this.ruleForm2.pass
           })
-<<<<<<< HEAD
-          console.log(4343,result)
-          if(result.length>0){
+
+
+          // console.log(4343,result)
+          // if(result.length>0){
             
-            this.$store.commit('userAction',{success:true,msg:"登录成功！",ctype:result[0].ctype,phone:result[0].phone,loginstatus:true})
-=======
+          //   this.$store.commit('userAction',{success:true,msg:"登录成功！",ctype:result[0].ctype,phone:result[0].phone,loginstatus:true})
+
           if(result.length>0){
             this.$store.commit('userAction',
               {success:true,
               msg:"登录成功！",
+              loginstatus:true,
+              phone:result[0].phone,ctype:result[0].ctype
               })
->>>>>>> parent of 5c1b10b... 增加管理员权限，增加用户注册时间
+            
              setTimeout(()=>{
-              this.$store.commit('userAction',{success:false,msg:""})
-              this.$store.commit("setPopLog",{LogisShow:false,nav:1})
-            },1000)
+                this.$store.commit('popMessage',{success:false,msg:"" })
+                this.$store.commit("setPopLog",{LogisShow:false,nav:1})
+             },1000)
+             // console.log(4324,this.$store.state.loginstatus)
              this.$router.push('/')
           }else{
             this.$store.commit('userAction',

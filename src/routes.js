@@ -10,16 +10,18 @@ export default [
 
 	{path:'/admin',component:Admin
 	,beforeEnter:(to,from,next)=>{
+		// console.log('011',store.state.loginstatus)
 		if(store.state.loginstatus == true){
-			if(store.state.ctype !== 1){
-				store.commit('userAction',{success:true,msg:"没有权限查看，请联系管理员。"})
-				setTimeout(()=>{
-					store.commit('userAction',{success:false,msg:""})
-
+			// console.log('0112',store.state.ctype)
+			if(store.state.ctype == 0){
+				store.commit('popMessage',{success:true,msg:"没有权限查看，请联系管理员。"})
+				setTimeout(function(){
+					store.commit('popMessage',{success:false,msg:""})
 				},1000)
-			}else{
+			}else if(store.state.ctype == 1){
 				next()
-			}
+
+			}else{}
 			
 		}else{
 			// 未登录提示登录
@@ -34,11 +36,12 @@ export default [
 	{path:'/',component:ShowBlogs},
 	{path:'/search',component:SearchBlogs},
 	{path:'/add',component:AddBlog,beforeEnter:(to,from,next)=>{
+		// console.log('044',store.state.loginstatus)
 		if(store.state.loginstatus == true){
-			// console.log('已登陆')
+			// console.log('已登陆add')
 			next()
 		}else{
-			// console.log('未登录')
+			// console.log('未登录add')
 			store.commit("setPopLog",{LogisShow:true,nav:1})
 		}
 	}},

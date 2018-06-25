@@ -62,7 +62,7 @@
 		},
 		methods:{
 			login(){
-				this.$store.commit('userAction',{loginstatus:false,phone:null,ctype:""})
+				// this.$store.commit('userAction',{loginstatus:false,phone:null,ctype:""})
 				this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				this.$store.commit("setPopReg",{RegisShow:false,nav:1})
 				

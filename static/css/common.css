@@ -7,6 +7,7 @@
     -moz-osx-font-smoothing: grayscale;
     transition: all .5s ease 0s;
     color: #333;
+
 }
 html, body{
     height: 100%;
@@ -114,6 +115,9 @@ input[disabled="disabled"]{
 }
 .c-orange{
     color: #f08519 !important;
+}
+.c-green{
+    color: #67C23A !important;
 }
 
 

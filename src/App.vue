@@ -14,6 +14,7 @@
       <register></register>
     </div>
    </div>
+
    <div class="poptips dis-box justify-content-center" v-if="success"><div class="cf fs12">{{msg}}</div></div>
   </div>
 </template>
@@ -104,9 +105,10 @@ export default {
   background: #888;
   z-index: 1003;   
   width: 6.5rem;
-  height: 2.5rem;
+  height: 3.5rem;
   border-radius: 8px;
   opacity: 0.9;
+  padding: 0 0.555556rem;
 }
 .el-input__inner{
   height: 1.47rem !important;

@@ -15,7 +15,7 @@
 
     <div class="pd-15 bb dis-box">
       <div class="iconfont icon-dengluyonghu c9"></div>
-      <input type="text" placeholder="手机号" class="pl-10 flex-1" v-model="ruleForm2.phone" @blur="checkAccount" >
+      <input type="text" id="r_account" placeholder="手机号" class="pl-10 flex-1" v-model="ruleForm2.phone" @blur="checkAccount" >
     </div>
 
     <div class="pd-15 bb dis-box">
@@ -51,8 +51,8 @@
         users:[]
       }
     },
-    mounted(){
-        
+    updated(){
+        document.getElementById('r_account').focus();
     },
     computed:{
       nav(){

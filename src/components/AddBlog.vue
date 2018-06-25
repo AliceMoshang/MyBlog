@@ -5,7 +5,7 @@
     <form action="" v-if="submitie" v-theme:column="'middle'" class="mt-10">
       <div class="dis-box bb pt-5">
         <label class="tit "><i class="iconfont icon-wenxue pl-5"></i>BlOGTITLE:</label>
-        <input type="text" v-model="blog.title" required="" class="flex-1" />
+        <input id="blog_titile" type="text" v-model="blog.title" required="" class="flex-1" />
       </div> 
       <div class="plr-20">
           <div>
@@ -69,11 +69,13 @@ export default {
       submitie: true
     }
   },
-  
   computed:{
     phone(){
       return this.$store.getters.getAccount
     }
+  },
+  mounted(){
+    document.getElementById('blog_titile').focus();
   },
   methods:{
 
@@ -87,6 +89,9 @@ export default {
       }     
       this.$http.post("/Aposts.json",data).then((data)=>{
           this.submitie = false
+          setTimeout(()=>{
+            this.$router.push('/')
+          },1000)
       })
     }
   }

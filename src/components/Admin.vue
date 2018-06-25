@@ -24,7 +24,7 @@
 					</td>
 					<td style="width: 168px;"><input type="text" placeholder="请输入" v-model="newUsers.email" @blur="checkEmail(newUsers.email)"></td>
 					<td style="width: 123px;">
-						<el-select v-model="newUsers.type" placeholder="必选"  style="width: 100px;">
+						<el-select v-model="newUsers.ctype" placeholder="必选"  style="width: 100px;">
 							<el-option
 							v-for="item in options"
 							:key="item.value"
@@ -69,7 +69,7 @@
 					<td style="width: 122px;">{{item.phone}}</td>
 					<td style="width: 168px;">{{item.email}}</td>
 					<td style="width: 123px;">
-						<el-select v-model="item.type"  style="width: 93px;"  v-bind:disabled="item.hidden">
+						<el-select v-model="item.ctype"  style="width: 93px;"  v-bind:disabled="item.hidden">
 							<el-option
 							v-for="item in options"
 							:key="item.value"
@@ -118,7 +118,7 @@ export default{
 	        	pass:'',
 	        	phone:'',
 	        	email:'',
-	        	type:'',
+	        	ctype:'',
 	        	DateStr:'',
 	        	TimeStr:'',
 	        },
@@ -159,30 +159,19 @@ export default{
 	methods:{
 		
 		update(item){
-			// console.log(645,item)
-			let rs_type = ""
-			if(item.type==0){
-				rs_type = 1
-			}else{
-				rs_type =0
-			}
+			console.log(645,item)
 			this.$http.put('/BlogUsers/'+item.id+'.json',item).then(res=>{
 				console.log(7474,res.data)
-
 				this.botMsg = "权限更改成功"
 				item.hidden = true
-
 			})
 		},
 		modify(item){
 			item.hidden = !item.hidden
 		},
 		deleteUser(item){
-			
-			console.log(777,rs_type)
 			this.$http.delete('/BlogUsers/'+item.id+'.json').then(res=>{
 				this.$store.commit('deleteUserItems',item)
-				 
 		})
 		},
 		checkPhone(Phone){
@@ -227,11 +216,11 @@ export default{
 				pass: this.newUsers.pass,
 				phone: this.newUsers.phone,
 				email: this.newUsers.email,
-				type: this.newUsers.type,
+				ctype: this.newUsers.ctype,
 				datestr: this.DateStr,
 				timestr: this.TimeStr,
 			}
-			let nec = ['phone','pass','type']
+			let nec = ['phone','pass','ctype']
 			let res_exist = checkData('complement',data,nec)
 			if(!res_exist.status){
 				this.botMsg = res_exist.msg
@@ -251,7 +240,7 @@ export default{
 				checkpass:"",
 				phone: data.phone,
 				email: data.email,
-				type: data.type,
+				ctype: data.ctype,
 				datestr: this.DateStr,
 				timestr: this.TimeStr,
 				hidden: this.newUsers.hidden,
@@ -270,7 +259,7 @@ export default{
 				this.newUsers.pass = ""
 				this.newUsers.phone = ""
 				this.newUsers.email = ""
-				this.newUsers.type = ""
+				this.newUsers.ctype = ""
 			})
 		},
 		getCtime(){
@@ -301,8 +290,6 @@ export default{
 	background: #f6f6f6;
 	margin: 0 auto;
 }
-
-
 
 .title{
 	box-sizing: border-box;

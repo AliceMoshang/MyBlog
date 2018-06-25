@@ -55,7 +55,7 @@
         this.$store.commit("setPopLog",false)
       },
       tapnav(boolean,n){
-        this.$store.commit("setPopLog",{LogisShow:boolean,nav:n,loginstatus:false,phone:null})
+        this.$store.commit("setPopLog",{LogisShow:boolean,nav:n,loginstatus:false,phone:null,ctype:""})
         this.$store.commit("setPopReg",{RegisShow:!boolean,nav:n})
       },
       checkAccount(){
@@ -94,15 +94,15 @@
             return user.phone === this.ruleForm2.phone &&
             user.pass === this.ruleForm2.pass
           })
-
+          console.log(4343,result)
           if(result.length>0){
-            this.$router.push('/')
-            this.$store.commit('userAction',{success:true,msg:"登录成功！",type:result[0].type})
+            
+            this.$store.commit('userAction',{success:true,msg:"登录成功！",ctype:result[0].ctype,phone:result[0].phone,loginstatus:true})
              setTimeout(()=>{
-              this.$store.commit('userAction',{success:false,msg:"",loginstatus:true,
-                phone:result[0].phone})
+              this.$store.commit('userAction',{success:false,msg:""})
               this.$store.commit("setPopLog",{LogisShow:false,nav:1})
             },1000)
+             this.$router.push('/')
           }else{
             this.$store.commit('userAction',
               {success:true,

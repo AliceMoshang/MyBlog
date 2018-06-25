@@ -64,7 +64,7 @@
         this.$store.commit("setPopReg",false)
       },
       tapnav(boolean,n){
-        this.$store.commit("setPopLog",{LogisShow:boolean,nav:n})
+        this.$store.commit("setPopLog",{LogisShow:boolean,nav:n,phone:null,ctype:""})
         this.$store.commit("setPopReg",{RegisShow:!boolean,nav:n})
       },
       checkAccount(){
@@ -95,7 +95,7 @@
           checkpass:this.ruleForm2.checkpass,
           name:"",
           email:"",
-          type:"0",
+          ctype:"0",
           datestr:re_Ctime.DateStr,
           timestr:re_Ctime.TimeStr,
           hidden: false,

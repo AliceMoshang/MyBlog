@@ -109,10 +109,10 @@ export default {
   opacity: 0.9;
 }
 .el-input__inner{
-  height: 34px !important;
-    line-height: 34px !important;
+  height: 1.47rem !important;
+    line-height: 1.47rem !important;
 } 
 .el-input__icon{
-  line-height: 34px !important;
+  line-height: 1.47rem !important;
 }
 </style>

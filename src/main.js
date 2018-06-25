@@ -9,6 +9,7 @@ import Routes from './routes'
 import axios from 'axios'
 import {store} from './store/store.js'
 
+
 import '../static/css/common.css'
 import '../static/css/font/iconfont.css'
 // import {Pagination} from 'element-ui'
@@ -21,11 +22,8 @@ Vue.prototype.$http =axios
 // axios.defaults.headers.post['Content-type'] = 'application/urlencode' //post请求头
 // axios.defaults.headers.get['Accepts'] = 'application/json' //get请求头
 
-// Vue.use(VueResource)
 Vue.use(VueRouter)
-// Vue.use(Pagination)
-// Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
-// Vue.http.options.root = '/root';
+
 
 const router = new VueRouter({
 	routes: Routes,
@@ -39,7 +37,8 @@ import {
   	Input,
   	Icon,
   	Table,
-  	TableColumn
+  	TableColumn,
+  	Pagination
   } from 'element-ui'
 Vue.use(Form)
 Vue.use(FormItem)
@@ -50,6 +49,7 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Pagination)
 
 
 

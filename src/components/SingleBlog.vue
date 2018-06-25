@@ -43,7 +43,7 @@
 				blogaccount:'',
 				stateMessage:'',
 				msgState: false,
-				type:''
+				ctype:''
 			}
 		},
 		computed:{
@@ -53,9 +53,7 @@
 			phone(){
 				return this.$store.state.phone
 			},
-			// type(){
-			// 	return this.$store.state.type
-			// }
+			
 		},
 		created(){
 			this.$http.get('/Aposts/'+this.id+'.json').then((res)=> {
@@ -71,10 +69,15 @@
 				for(let key in res.data){
 					users.push(res.data[key])
 				}
+				// console.log(767,users)
 				let result = users.filter((user)=>{
 					return user.phone == this.phone
 				})
-				this.type = result[0].type
+				// console.log(666,result)
+				if(result.length>0){
+					this.ctype = result[0].ctype
+				}return
+				
 
 			})
 		},
@@ -84,7 +87,7 @@
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
-					if(this.type==0 && this.blogaccount !== this.phone){
+					if(this.ctype==0 && this.blogaccount !== this.phone){
 						// console.log('他人文章无权限删除')
 						this.msgState = true
 						this.stateMessage ="他人文章无权删除!"
@@ -106,7 +109,7 @@
 					//未登录让其登录
 					this.$store.commit("setPopLog",{LogisShow:true,nav:1})
 				}else{
-					if( this.type==0 && this.blogaccount !== this.phone){
+					if( this.ctype==0 && this.blogaccount !== this.phone){
 						this.msgState = true
 						this.stateMessage ="他人文章无权编辑!"
 					}else{
